@@ -1,0 +1,13 @@
+{
+  "title": "small-clock",
+  "name": "small-clock",
+  "version": "0.0.1",
+  "description": "A simple and small 24hr clock which sits in your toolbar. Ideal for fullscreen browser use",
+  "main": "index.js",
+  "author": "david@illsley.org",
+  "engines": {
+    "firefox": ">=33.0a1",
+    "fennec": ">=33.0a1"
+  },
+  "license": "MIT"
+}
