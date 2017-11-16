@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "small-clock",
-  "version": "0.0.4",
-  "description": "A simple and small 24hr clock which sits in your toolbar. Ideal for fullscreen browser use",
+  "version": "0.0.5",
+  "description": "A simple and small text based clock which sits in your toolbar. Ideal for fullscreen browser use",
   "background": {
     "scripts": ["background.js"]
   },

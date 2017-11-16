@@ -1,14 +1,28 @@
 var colours = ["black", "white", "red", "blue", "green", "yellow"];
 var colour = "black";
+var format24 = true;
 
 browser.storage.sync.get('colour').then((res) => {
   colour = res.colour || 'black';
   update();
 });
 
+browser.storage.sync.get('format24').then((res) => {
+  format24 = res.format24 || true;
+  update();
+});
+
 function update() {
   var date = new Date();
   var hours = date.getHours();
+
+  if(format24 != true) {
+    hours = hours % 12
+    if(hours == 0){
+      hours = 12;
+    }
+  }
+
   var minutes=  date.getMinutes();
 
   var canvas = document.createElement("canvas");
@@ -30,14 +44,21 @@ function update() {
 browser.browserAction.onClicked.addListener(() => {
   var currentIndex = colours.indexOf(colour);
   var newIndex = (currentIndex + 1) % colours.length;
+  if(newIndex == 0) {
+    format24 = !format24;
+  }
   browser.storage.sync.set({
-    colour: colours[newIndex]
+    colour: colours[newIndex],
+    format24: format24
   });
 });
 
 function logStorageChange(changes, area) {
   if(changes['colour']) {
     colour = changes['colour'].newValue
+  }
+  if(changes['format24']) {
+    format24 = changes['format24'].newValue
   }
   update();
 }
