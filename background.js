@@ -8,7 +8,8 @@ browser.storage.sync.get('colour').then((res) => {
 });
 
 browser.storage.sync.get('format24').then((res) => {
-  format24 = res.format24 || true;
+  var stringFormat = res.format24 || "twentyfour";
+  format24 = (stringFormat == "twentyfour");
   update();
 });
 
@@ -49,7 +50,7 @@ browser.browserAction.onClicked.addListener(() => {
   }
   browser.storage.sync.set({
     colour: colours[newIndex],
-    format24: format24
+    format24: (format24 ? "twentyfour" : "twelve")
   });
 });
 
@@ -58,7 +59,7 @@ function logStorageChange(changes, area) {
     colour = changes['colour'].newValue
   }
   if(changes['format24']) {
-    format24 = changes['format24'].newValue
+    format24 = (changes['format24'].newValue == "twentyfour");
   }
   update();
 }
